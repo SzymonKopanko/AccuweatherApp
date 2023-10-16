@@ -1,0 +1,11 @@
+C:\Users\chleb\Desktop\ConsoleAppAccuWeather\bin\Debug\ConsoleAppAccuWeather.exe.config
+C:\Users\chleb\Desktop\ConsoleAppAccuWeather\bin\Debug\ConsoleAppAccuWeather.exe
+C:\Users\chleb\Desktop\ConsoleAppAccuWeather\bin\Debug\ConsoleAppAccuWeather.pdb
+C:\Users\chleb\Desktop\ConsoleAppAccuWeather\bin\Debug\Newtonsoft.Json.dll
+C:\Users\chleb\Desktop\ConsoleAppAccuWeather\bin\Debug\Newtonsoft.Json.xml
+C:\Users\chleb\Desktop\ConsoleAppAccuWeather\obj\Debug\ConsoleAppAccuWeather.csproj.AssemblyReference.cache
+C:\Users\chleb\Desktop\ConsoleAppAccuWeather\obj\Debug\ConsoleAppAccuWeather.csproj.SuggestedBindingRedirects.cache
+C:\Users\chleb\Desktop\ConsoleAppAccuWeather\obj\Debug\ConsoleAppAccuWeather.csproj.CoreCompileInputs.cache
+C:\Users\chleb\Desktop\ConsoleAppAccuWeather\obj\Debug\ConsoleAppAccuWeather.csproj.CopyComplete
+C:\Users\chleb\Desktop\ConsoleAppAccuWeather\obj\Debug\ConsoleAppAccuWeather.exe
+C:\Users\chleb\Desktop\ConsoleAppAccuWeather\obj\Debug\ConsoleAppAccuWeather.pdb
