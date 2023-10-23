@@ -6,22 +6,20 @@ using System.Threading.Tasks;
 
 namespace ConsoleAppAccuWeather.Models
 {
-    internal class Temperature
+    public class Temperature
     {
-        public Metric Metric { get; set; }
-        public Imperial Imperial { get; set; }
         public Minimum Minimum { get; set; }
         public Maximum Maximum { get; set; }
     }
 
-    internal class Minimum
+    public class Minimum
     {
         public double Value { get; set; }
         public string Unit { get; set; }
         public int UnitType { get; set; }
     }
 
-    internal class Maximum
+    public class Maximum
     {
         public double Value { get; set; }
         public string Unit { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleAppAccuWeather.Models
 {
-    internal class Weather
+    public class Weather
     {
         public DateTime LocalObservationDateTime { get; set; }
         public int EpochTime { get; set; }
@@ -15,7 +15,7 @@ namespace ConsoleAppAccuWeather.Models
         public bool HasPrecipitation { get; set; }
         public object PrecipitationType { get; set; }
         public bool IsDayTime { get; set; }
-        public Temperature Temperature { get; set; }
+        public TemperatureData Temperature { get; set; }
         public string MobileLink { get; set; }
         public string Link { get; set; }
     }

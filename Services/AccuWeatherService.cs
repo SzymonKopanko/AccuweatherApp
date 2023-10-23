@@ -14,9 +14,10 @@ namespace ConsoleAppAccuWeather.Services
         private const string current_conditions_endpoint = "currentconditions/v1/{0}?apikey={1}&language{2}";
 
         private const string daily_forecast_endpoint = "forecasts/v1/daily/5day/{0}?apikey={1}&language={2}&metric=true";
-        private const string hourly_forecast_endpoint = "forecasts/v1/hourly/12hour/{0]?apikey={1}&language={2}&metric=true";
-        private const string daily_forecast_with_text_endpoint = "forecasts/v1/daily/5day/{0}?apikey={1}&language={2}&details=true";
-        private const string hourly_forecast_with_text_endpoint = "forecasts/v1/hourly/12hour/{0}?apikey={1}&language={2}&details=true";
+        private const string hourly_forecast_endpoint = "forecasts/v1/hourly/12hour/{0}?apikey={1}&language={2}&metric=true";
+        private const string historical_conditions_endpoint = "currentconditions/v1/{0}/historical?apikey={1}&language{2}";
+        private const string alarms_endpoint = "alarms/v1/1day/{0}?apikey={1}&language{2}";
+        private const string indices_endpoint = "indices/v1/daily/1day/{0}?apikey={1}&language{2}";
 
         private string api_key;
         private string language;
@@ -36,7 +37,6 @@ namespace ConsoleAppAccuWeather.Services
             {
                 var response = await client.GetAsync(uri);
                 string json = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(json);
                 City[] cities = JsonConvert.DeserializeObject<City[]>(json);
                 return cities;
             }
@@ -49,62 +49,68 @@ namespace ConsoleAppAccuWeather.Services
             {
                 var response = await client.GetAsync(uri);
                 string json = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(json);
                 Weather[] weathers = JsonConvert.DeserializeObject<Weather[]>(json);
                 return weathers.FirstOrDefault();
             }
         }
 
-        public async Task<Forecast[]> GetDailyForecast(string cityKey)
+        public async Task<DailyForecast[]> GetDailyForecast(string cityKey)
         {
             string uri = base_url + "/" + string.Format(daily_forecast_endpoint, cityKey, api_key, language);
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.GetAsync(uri);
                 string json = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(json);
-                Forecast[] forecasts = JsonConvert.DeserializeObject<Forecast[]>(json);
-                return forecasts;
+                WeatherData data = JsonConvert.DeserializeObject<WeatherData>(json);
+                return data.DailyForecasts.ToArray();
             }
         }
 
-
-        public async Task<Forecast[]> GetHourlyForecast(string cityKey)
+        public async Task<HourlyForecast[]> GetHourlyForecast(string cityKey)
         {
             string uri = base_url + "/" + string.Format(hourly_forecast_endpoint, cityKey, api_key, language);
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.GetAsync(uri);
                 string json = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(json);
-                Forecast[] forecasts = JsonConvert.DeserializeObject<Forecast[]>(json);
-                return forecasts;
+                HourlyForecast[] data = JsonConvert.DeserializeObject<HourlyForecast[]>(json).ToArray();
+                return data;
             }
         }
 
-        public async Task<ForecastWithText[]> GetDailyForecastWithText(string cityKey)
+        public async Task<Weather[]> GetHistoricalConditions(string cityKey)
         {
-            string uri = base_url + "/" + string.Format(daily_forecast_with_text_endpoint, cityKey, api_key, language);
+            string uri = base_url + "/" + string.Format(historical_conditions_endpoint, cityKey, api_key, language);
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.GetAsync(uri);
                 string json = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(json);
-                ForecastWithText[] forecasts = JsonConvert.DeserializeObject<ForecastWithText[]>(json);
-                return forecasts;
+                Weather[] weathers = JsonConvert.DeserializeObject<Weather[]>(json).ToArray();
+                return weathers;
             }
         }
 
-        public async Task<ForecastWithText[]> GetHourlyForecastWithText(string cityKey)
+        public async Task<AlarmData[]> GetAlarms(string cityKey)
         {
-            string uri = base_url + "/" + string.Format(hourly_forecast_with_text_endpoint, cityKey, api_key, language);
+            string uri = base_url + "/" + string.Format(alarms_endpoint, cityKey, api_key, language);
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.GetAsync(uri);
-                string json = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(json);
-                ForecastWithText[] forecasts = JsonConvert.DeserializeObject<ForecastWithText[]>(json);
-                return forecasts;
+                var json = await response.Content.ReadAsStringAsync();
+                AlarmData[] alarms = JsonConvert.DeserializeObject<AlarmData[]>(json);
+                return alarms;
+
+            }
+        }
+        public async Task<Index[]> GetIndices(string cityKey)
+        {
+            string uri = base_url + "/" + string.Format(indices_endpoint, cityKey, api_key, language);
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetAsync(uri);
+                var json = await response.Content.ReadAsStringAsync();
+                Index[] indexes = JsonConvert.DeserializeObject<Index[]>(json);
+                return indexes;
             }
         }
     }
